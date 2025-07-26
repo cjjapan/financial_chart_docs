@@ -8,39 +8,39 @@ hero:
     file: ../../assets/logo.png
   actions:
     - text: Getting started
-      link: /guides/01_start/
+      link: /guides/10_start/
       icon: right-arrow
-    - text: Repository
-      link: https://github.com/cjjapan/financial_chart
-      icon: github
-      variant: minimal
-    - text: Package
-      link: https://pub.dev/packages/financial_chart
-      icon: seti:dart
+ #   - text: Repository
+ #     link: https://github.com/cjjapan/financial_chart
+ #     icon: github
+ #     variant: minimal
+ #   - text: Package
+ #     link: https://pub.dev/packages/financial_chart
+ #     icon: seti:dart
+ #     variant: minimal
+    - text: Live demo
+      link: https://cjjapan.github.io/financial_chart
+      icon: rocket
       variant: minimal
 ---
 
+import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Aside } from '@astrojs/starlight/components';
 import EmbedChart from '../../components/EmbedChart.astro';
 
-<EmbedChart name="chart1"/>
+## Features
 
-{/*
-import { Card, CardGrid } from '@astrojs/starlight/components';
+<ul>
+  <li>Supports OHLC, candlestick, line, area, bar graphs.</li>
+  <li>Supports markers over graphs and axes, including labels, lines, arrows, callouts, shapes, etc.</li>
+  <li>Easy to extend to add custom graph types and markers.</li>
+  <li>Resizable multiple panels and multiple graphs and axes in single panel.</li>
+  <li>Show tooltips and crosshair lines for data points.</li>
+  <li>Zoom and pan of axes and graph. double tap axes to reset zoom.</li>
+  <li>Supports momentum scrolling.</li>
+  <li>Show animation when zooming.</li>
+  <li>Dynamic data loading with loading indicator.</li>
+  <li>Live update of data and graphs.</li>
+  <li>Customizable theme support with dark and light presets.</li>
+  </ul>
 
-## Next steps
-
-<CardGrid>
-	<Card title="Update content" icon="pencil">
-		Edit `src/content/docs/index.mdx` to see this page change.
-	</Card>
-	<Card title="Add new content" icon="add-document">
-		Add Markdown or MDX files to `src/content/docs` to create new pages.
-	</Card>
-	<Card title="Configure your site" icon="setting">
-		Edit your `sidebar` and other config in `astro.config.mjs`.
-	</Card>
-	<Card title="Read the docs" icon="open-book">
-		Learn more in [the Starlight Docs](https://starlight.astro.build/).
-	</Card>
-</CardGrid>
-*/}

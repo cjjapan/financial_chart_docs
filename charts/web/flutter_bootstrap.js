@@ -3,6 +3,24 @@
 
 let _flutterActiveViews = [];
 
+class ChartViewParam {
+  constructor(name, ticker, theme, config) {
+    this.name = name;
+    this.ticker = ticker;
+    this.theme = theme || "light";
+    this.config = config || `{
+      "chartType": "line",
+      "showLegend": true,
+      "showGrid": true,
+      "showTooltip": true,
+      "showTitle": true,
+      "title": name,
+      "xAxisLabel": "Time",
+      "yAxisLabel": "Price",
+    }`;
+  }
+}
+
 function _recreateFlutterViews(app, theme) {
   for(const viewId of _flutterActiveViews) {
     app.removeView(viewId);
@@ -15,11 +33,7 @@ function _recreateFlutterViews(app, theme) {
     if (name) {
       const viewId = app.addView({
         hostElement: chartView,
-          initialData: {
-          name: name,
-          ticker: ticker,
-          theme: theme || "light",
-        }
+        initialData: new ChartViewParam(name, ticker, theme),
       });
       _flutterActiveViews.push(viewId);
     }
@@ -43,7 +57,12 @@ function _listenToThemeChange(app) {
 
 _flutter.loader.load({
   config: {
-    entryPointBaseUrl: '/chart-demo/'
+    entryPointBaseUrl: '/chart-demo',
+    /*entrypointUrl: "/main.dart.js",
+    serviceWorker: {
+      serviceWorkerVersion: 1,
+      serviceWorkerUrl: "/flutter_service_worker.js?v=",
+    },*/
   },
   onEntrypointLoaded: async function onEntrypointLoaded(engineInitializer) {
   let engine = await engineInitializer.initializeEngine({
@@ -54,4 +73,3 @@ _flutter.loader.load({
   _listenToThemeChange(app);
   }
 });
-

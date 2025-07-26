@@ -81,7 +81,6 @@ final chart = GChart(
                 // A value viewport controls visible range along Y axis.
                 // It is being used by axes and graphs to render on canvas correctly.
                 GValueViewPort(
-                    id: "price",
                     valuePrecision: 2,
                     autoScaleStrategy: GValueViewPortAutoScaleStrategyMinMax(
                         dataKeys: ["high", "low"],
@@ -93,6 +92,7 @@ final chart = GChart(
             // X Axes
             pointAxes: [GPointAxis()],
             graphs: [
+                GGraphGrids(),
                 // valuesKeys should be valid keys defined in dataSource seriesProperties.
                 GGraphOhlc(ohlcValueKeys: const ["open", "high", "low", "close"]),
             ],
@@ -129,5 +129,15 @@ class ChartDemoPageState extends State<ChartDemoPage> with TickerProviderStateMi
 ```
 
 ## The result
-
-<EmbedChart name="chart1"/>
+<EmbedChart name="10_start"/>
+On the chart, you can:
+<ul>
+    <li>Mouse hover the chart to see the crosshairs.</li>
+    <li>Mouse hover the bar graph to see the highlighted markers.</li>
+    <li>Zoom the chart by scrolling mousewheel or pinching on touch screens.</li>
+    <li>Zoom the value viewport by dragging the Y axis.</li>
+    <li>Zoom the point viewport by dragging the X axis.</li>
+    <li>Scroll the graph by dragging the graph area.</li>
+    <li>Double tap on Y axis to reset the zooming.</li>
+    <li>Double tap on X axis to reset the zooming and scrolling offset.</li>
+</ul>

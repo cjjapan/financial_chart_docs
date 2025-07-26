@@ -1,3 +1,5 @@
 node_modules
 public/chart-demo/**
 .astro
+__**
+.DS_Store
