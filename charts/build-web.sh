@@ -1,1 +1,1 @@
-flutter build web --output ../public/chart-demo/
+flutter build web --output ../public/chart-demo/  --base-href "/financial_chart_docs/"

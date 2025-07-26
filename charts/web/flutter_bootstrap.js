@@ -57,7 +57,7 @@ function _listenToThemeChange(app) {
 
 _flutter.loader.load({
   config: {
-    entryPointBaseUrl: '/chart-demo',
+    entryPointBaseUrl: '/financial_chart_docs/chart-demo',
     /*entrypointUrl: "/main.dart.js",
     serviceWorker: {
       serviceWorkerVersion: 1,
@@ -67,7 +67,7 @@ _flutter.loader.load({
   onEntrypointLoaded: async function onEntrypointLoaded(engineInitializer) {
   let engine = await engineInitializer.initializeEngine({
     multiViewEnabled: true,
-    assetBase: '/chart-demo/',
+    assetBase: '/financial_chart_docs/chart-demo/',
   });
   let app = await engine.runApp();
   _listenToThemeChange(app);
