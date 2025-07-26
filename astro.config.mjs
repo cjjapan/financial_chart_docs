@@ -4,6 +4,8 @@ import starlight from '@astrojs/starlight';
 
 // https://astro.build/config
 export default defineConfig({
+	site: 'https://cjjapan.github.io',
+	base: 'financial_chart_docs',
 	integrations: [
 		starlight({
 			title: 'financial_chart',
