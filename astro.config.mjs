@@ -20,6 +20,24 @@ export default defineConfig({
 				icon: 'seti:dart', label: 'Pub.dev', href: 'https://pub.dev/packages/financial_chart'
 			}
 			],
+			head: [
+				// Adding google analytics
+				{
+					tag: 'script',
+					attrs: {
+						src: `https://www.googletagmanager.com/gtag/js?id=G-KV9ZVYXLWH`,
+					},
+				},
+				{
+					tag: 'script',
+					content: `
+						window.dataLayer = window.dataLayer || [];
+						function gtag(){dataLayer.push(arguments);}
+						gtag('js', new Date());
+						gtag('config', 'G-KV9ZVYXLWH');
+					`,
+				},
+			],
 			sidebar: [
 				{
 					label: 'Guides',
@@ -30,8 +48,8 @@ export default defineConfig({
 					],*/
 				},
 				{
-					label: 'Reference',
-					autogenerate: { directory: 'reference' },
+					label: 'Components',
+					autogenerate: { directory: 'components' },
 				},
 			],
 		}),
