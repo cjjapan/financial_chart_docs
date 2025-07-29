@@ -6,6 +6,7 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
 	site: 'https://cjjapan.github.io',
 	base: 'financial_chart_docs',
+	devToolbar: { enabled: false },
 	integrations: [
 		starlight({
 			title: 'financial_chart',
