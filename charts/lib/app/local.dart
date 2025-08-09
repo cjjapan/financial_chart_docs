@@ -11,7 +11,7 @@ class LocalApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: ChartView(name: "50_panel", ticker: "AAPL", theme: "dark",),
+      home: ChartView(name: "graph_area1", ticker: "AAPL", theme: "dark",),
     );
   }
 }

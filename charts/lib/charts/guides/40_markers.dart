@@ -1,6 +1,6 @@
-part of "charts.dart";
+part of "../charts.dart";
 
-GChart chart_40(GDataSource dataSource, String themeName) {
+GChart chartGuideMarkers(GDataSource dataSource, String themeName) {
   final theme = themeName == "dark" ? GThemeDark() : GThemeLight();
   return GChart(
     dataSource: dataSource,

@@ -1,5 +1,7 @@
 ---
 title: GChart
+sidebar: 
+    order: 20
 ---
 import { Aside } from '@astrojs/starlight/components';
 
@@ -7,7 +9,7 @@ import { Aside } from '@astrojs/starlight/components';
 
 ### `dataSource`
 
-**type:** [`GDataSource`](../20_datasource/)  
+**type:** [`GDataSource`](../datasource/)  
 **required:** `true`  
 
 The data source for the chart. This is where the chart gets its data from.  
@@ -17,9 +19,16 @@ Although you can update the data in the `dataSource` after chart being created, 
 If you want to change to another instance, you need to recreate the chart object.
 </Aside>
 
+### `panels`
+
+**type:** [`List<GPanel>`](../panel/)   
+**required:** `true`
+
+The list of panels in the chart. each panel has its own graphs and axes.
+
 ### `pointViewPort`  
 
-**type:** [`GPointViewPort`](../30_point_viewport/)  
+**type:** [`GPointViewPort`](../point_viewport/)  
 **required:** `false`  
 **default:** `GPointViewPort(autoScaleStrategy: const GPointViewPortAutoScaleStrategyLatest())`  
 
@@ -29,7 +38,7 @@ Set to your own instance to customize its behavior.
 
 ### `background` 
 
-**type:** [`GBackground`](../90_background/)  
+**type:** [`GBackground`](../background/)  
 **required:** `false`  
 **default:** `GBackground()`
 
@@ -37,7 +46,7 @@ The background component which draws the background of the chart.
 The default will draw a colored rectangle. extend the `GBackground` class to customize the background drawing.
 
 ### `splitter`
-**type:** [`GSplitter`](../40_panel/)  
+**type:** [`GSplitter`](../panel/)  
 **required:** `false`  
 **default:** `GSplitter()`
 
@@ -45,7 +54,7 @@ The splitter component which being used to resize panels. all panels share the s
 Set to your own instance to customize.
 
 ### `crosshair`
-**type:** [`GCrosshair`](../50_crosshair/)  
+**type:** [`GCrosshair`](../crosshair/)  
 **required:** `false`  
 **default:** `GCrosshair()`
 
@@ -74,7 +83,7 @@ When it is set to `false`, the `hitTestMode` property of all components will be 
 **required:** `false`  
 **default:** `const Rect.fromLTWH(0, 0, 500, 500)`  
 
-This is for read only. the size of the chart area will be always calculated from size of parent [`GChartWidget`](../00_chart_widget/) widget.
+This is for read only. the size of the chart area will be always calculated from size of parent [`GChartWidget`](../chart_widget/) widget.
 
 ### `minSize`  
 **type:** `Size`  
@@ -83,7 +92,7 @@ This is for read only. the size of the chart area will be always calculated from
 
 The minimum size of the chart area.
 <Aside type="note">
-The chart may draws outside of the widget area when parent [`GChartWidget`](../00_GChartWidget) size is smaller than the minimum size.
+The chart may draws outside of the widget area when parent [`GChartWidget`](../chart_widget/) size is smaller than the minimum size.
 use constraints to limit the size of the parent widget or clip the widget.
 </Aside>
 
@@ -113,9 +122,10 @@ Do not apply any update that would cause the chart to re-paint in this callback.
 ## Enums
 
 ### `GPointerScrollMode`
-**values:** `none`, `zoom`, `move`  
-
-
+**values:**  
+- `none`: No action when mouse wheel is scrolled over the chart area.  
+- `zoom`: Zoom in or out the chart over x axis by changing the `pointViewPort`'.  
+- `move`: Scroll the chart over x axis by changing the `pointViewPort`'.  
 
 ## Methods
 
@@ -125,7 +135,7 @@ Do not apply any update that would cause the chart to re-paint in this callback.
 void addPanel(GPanel panel)
 ```
 
-Adds a panel to the chart.  
+Add a panel to the chart.  
 
 <Aside type="note">
 Do not call `chart.panels.add()` directly, use this method instead.
@@ -136,7 +146,7 @@ Do not call `chart.panels.add()` directly, use this method instead.
 void removePanel(GPanel panel)
 ```
 
-Removes a panel from the chart.
+Remove a panel from the chart.
 
 <Aside type="note">
 Do not call `chart.panels.remove()` directly, use this method instead.

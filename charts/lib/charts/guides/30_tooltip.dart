@@ -1,6 +1,6 @@
-part of "charts.dart";
+part of "../charts.dart";
 
-GChart chart_50(GDataSource dataSource, String themeName) {
+GChart chartGuideTooltip(GDataSource dataSource, String themeName) {
   final theme = themeName == "dark" ? GThemeDark() : GThemeLight();
   return GChart(
     dataSource: dataSource,
@@ -12,68 +12,60 @@ GChart chart_50(GDataSource dataSource, String themeName) {
             valuePrecision: 2,
             autoScaleStrategy: GValueViewPortAutoScaleStrategyMinMax(
               dataKeys: ["high", "low"],
+              // Add a margin to the bottom of the candlestick graph to avoid overlapping with the volume graph.
               marginStart: GSize.viewHeightRatio(0.3),
             ),
           ),
+          // Add a value viewport for volume graph and axis
           GValueViewPort(
             id: "volumeViewPort",
             valuePrecision: 0,
             autoScaleStrategy: GValueViewPortAutoScaleStrategyMinMax(
               dataKeys: ["volume"],
+              // Add a margin to the top to avoid overlapping with the candlestick graph.
               marginEnd: GSize.viewHeightRatio(0.7),
             ),
           ),
         ],
+        // Y Axes
         valueAxes: [
           GValueAxis(),
+          // Add a value axis for volume
           GValueAxis(
+            // set a id other than using the default one.
             id: "volume",
+            // set the viewport id which should match the one defined in valueViewPorts.
             viewPortId: "volumeViewPort",
+            // set the position of the axis to start (left side pf the graph).
             position: GAxisPosition.start,
-            scaleMode: GAxisScaleMode.none,
+            // disable scaling by dragging.
+            scaleMode: GAxisScaleMode.none
           ),
         ],
+        // X Axes
         pointAxes: [GPointAxis()],
         graphs: [
           GGraphGrids(),
           GGraphOhlc(ohlcValueKeys: const ["open", "high", "low", "close"]),
+          // Add a volume graph with correct valueViewPortId and valueKey.
           GGraphBar(valueKey: "volume", valueViewPortId: "volumeViewPort"),
         ],
+        // add the tooltip to the panel.
         tooltip: GTooltip(
+          // set the tooltip x position to follow the mouse pointer.
           position: GTooltipPosition.followPointer,
+          // set the tooltip y position to follow the value of the close price.
           followValueKey: "close",
           followValueViewPortId: "",
-          dataKeys: ["open", "high", "low", "close", "volume"],
+          // set the values to be displayed in the tooltip.
+          dataKeys: [
+            "open",
+            "high",
+            "low",
+            "close",
+            "volume",
+          ],
         ),
-        // set the height weight of the panel to 0.7 (70% of the chart height).
-        heightWeight: 0.7,
-      ),
-      // the second panel with its own valueViewPorts, axes, graphs and tooltip.
-      GPanel(
-        valueViewPorts: [
-          GValueViewPort(
-            valuePrecision: 2,
-            autoScaleStrategy: GValueViewPortAutoScaleStrategyMinMax(
-              dataKeys: ["high", "low"],
-            ),
-          ),
-        ],
-        valueAxes: [
-          GValueAxis(),
-          GValueAxis(id: "price2", position: GAxisPosition.start),
-        ],
-        pointAxes: [GPointAxis()],
-        graphs: [
-          GGraphGrids(),
-          GGraphLine(valueKey: "close"),
-        ],
-        tooltip: GTooltip(
-          position: GTooltipPosition.followPointer,
-          followValueKey: "close",
-          followValueViewPortId: "",
-          dataKeys: ["close"],
-        ),
-        heightWeight: 0.3,
       ),
     ],
   );

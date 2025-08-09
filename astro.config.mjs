@@ -25,6 +25,16 @@ export default defineConfig({
 				// Adding google analytics
 				{
 					tag: 'script',
+					content: `
+						var hostname = window.location.hostname;
+						if (hostname === "localhost" || hostname === "127.0.0.1") {
+							console.log("Google Analytics is disabled on localhost.");
+							window['ga-disable-G-KV9ZVYXLWH'] = true;
+						}
+					`,
+				},
+				{
+					tag: 'script',
 					attrs: {
 						src: `https://www.googletagmanager.com/gtag/js?id=G-KV9ZVYXLWH`,
 					},
@@ -43,10 +53,14 @@ export default defineConfig({
 				{
 					label: 'Guides',
 					autogenerate: { directory: 'guides' },
-					/*items: [
-						// Each item here is one entry in the navigation menu.
-						{ label: 'Getting started', slug: 'guides/01_start' },
-					],*/
+				},
+				{
+					label: 'Graphs',
+					autogenerate: { directory: 'graphs' },
+				},
+				{
+					label: 'Markers',
+					autogenerate: { directory: 'markers' },
 				},
 				{
 					label: 'Components',

@@ -1,10 +1,42 @@
-part of "charts.dart";
+---
+title: Adding a graph
+sidebar:
+    order: 20
+---
 
-GChart chart_30(GDataSource dataSource, String themeName) {
-  final theme = themeName == "dark" ? GThemeDark() : GThemeLight();
-  return GChart(
+import EmbedChart from '../../../components/EmbedChart.astro';
+
+## Add graph data
+
+Add `volume` data to `seriesValues` and `seriesProperties` of chart dataSource.
+
+```dart
+final dataSource = GDataSource<int, GData<int>>(
+    dataList: response.candlesData.map((candle) {
+        return GData<int>(
+            pointValue: candle.date.millisecondsSinceEpoch,
+            seriesValues: [
+                // ...
+                candle.volume, // volume data values
+            ],
+        );
+    }).toList(),
+    seriesProperties: const [
+        // ...
+        GDataSeriesProperty(key: 'volume', label: 'Volume', precision: 0), // volume data property
+    ],
+);
+
+```
+
+## Add graph and axis
+
+Add value viewpport, value axis and the graph.
+
+```dart
+final chart = GChart(
     dataSource: dataSource,
-    theme: theme,
+    theme: GThemeDark(),
     panels: [
       GPanel(
         valueViewPorts: [
@@ -50,23 +82,17 @@ GChart chart_30(GDataSource dataSource, String themeName) {
           // Add a volume graph with correct valueViewPortId and valueKey.
           GGraphBar(valueKey: "volume", valueViewPortId: "volumeViewPort"),
         ],
-        // add the tooltip to the panel.
-        tooltip: GTooltip(
-          // set the tooltip x position to follow the mouse pointer.
-          position: GTooltipPosition.followPointer,
-          // set the tooltip y position to follow the value of the close price.
-          followValueKey: "close",
-          followValueViewPortId: "",
-          // set the values to be displayed in the tooltip.
-          dataKeys: [
-            "open",
-            "high",
-            "low",
-            "close",
-            "volume",
-          ],
-        ),
       ),
     ],
-  );
-}
+);
+
+```
+
+## The result
+<EmbedChart name="guide_graph"/>
+
+On the chart you can zoom the price value viewport by dragging the right side Y axis,   
+but the X axis on the left side for volume value viewport is not draggble because `scaleMode` is set to `GAxisScaleMode.none`.
+  
+  
+See `Graphs` section for more graphs you can add to the chart.
